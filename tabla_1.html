@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actividad 2: Formulario de Divisores</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #5d3f8a; }
+        .formulario-contenedor { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; width: 350px; background-color: #f9f9f9; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="number"] { width: 100px; padding: 5px; margin-bottom: 10px; border: 1px solid #aaa; }
+        input[type="submit"] { padding: 10px 15px; background-color: #5d3f8a; color: white; border: none; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+
+    <h1>Actividad 2: Formulario de Rango de Divisores</h1>
+    <p>Introduce dos números enteros (mínimo 1) para definir el rango de posibles divisores de los números del 50 al 60.</p>
+
+
+    <div class="formulario-contenedor">
+        <form action="tabla2.php" method="POST">
+            <label for="num1">Primer número (Inicio de divisores):</label>
+            <input type="number" id="num1" name="num1" min="1" required>
+
+
+            <label for="num2">Segundo número (Fin de divisores):</label>
+            <input type="number" id="num2" name="num2" min="1" required>
+
+
+            <input type="submit" value="Generar Tabla Dinámica">
+        </form>
+    </div>
+
+
+</body>
+</html>
