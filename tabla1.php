@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -35,19 +35,26 @@
         /* 3. Estilo para la celda vacía de la esquina */
         th:empty {
             background-color: #5d3f8a; /* Color de la cabecera */
-            border: 1px solid #111; /* Borde simple */
+            border: 1px solid #111;
         }
         
-        /* 4. Estilo para el sombreado alternado (Posición impar-impar o par-par) */
-        /* Esta clase simula el fondo amarillo de la imagen que deseas */
-        .patron-claro {
-            background-color: #FFFF99; /* Amarillo claro */
+        /* 4. ESTILOS CLAVE PARA FILAS CONSECUTIVAS */
+        /* Color Naranja/Tostado (Filas pares: 2, 4, 6...) */
+        .fila-naranja { 
+            background-color: #FFDDAA;
+        }
+        /* Color Amarillo (Filas impares: 1, 3, 5...) */
+        .fila-amarilla { 
+            background-color: #FFFF99;
         }
         
-        /* El fondo por defecto de las celdas de resultado será el color tostado/salmón de la imagen deseada */
-        tbody td {
-            background-color: #FFDDAA; /* Tostado/Salmón */
+        /* Asegurarse de que el fondo de la primera columna sea siempre azul grisáceo, sin importar la clase de fila */
+        .fila-naranja td:first-child,
+        .fila-amarilla td:first-child {
+            background-color: #b0c4de; 
         }
+
+
     </style>
 </head>
 <body>
@@ -60,10 +67,7 @@
         <thead>
             <tr>
                 <th></th> <?php 
-                // $j es el índice de columna virtual (1 a 11)
-                $j_index = 0; 
                 for ($j = 50; $j <= 60; $j++) {
-                    $j_index++;
                     echo "<th>$j</th>";
                 }
                 ?>
@@ -71,28 +75,23 @@
         </thead>
         <tbody>
             <?php 
-            // $i es el índice de fila (1 a 10)
+            // Bucle FOR exterior para las filas de 1 a 10
             for ($i = 1; $i <= 10; $i++) {
+                // LÓGICA DE FILA: Impar (1, 3, 5...) = Amarillo; Par (2, 4, 6...) = Naranja
+                $clase_fila = ($i % 2 != 0) ? 'fila-amarilla' : 'fila-naranja';
             ?>
-                <tr>
+                <tr class="<?php echo $clase_fila; ?>">
                     <td><?php echo $i; ?></td> <?php 
-                    $j_index = 0; // Reinicia el índice de columna para cada fila
                     for ($j = 50; $j <= 60; $j++) {
-                        $j_index++;
                         
-                        // Lógica de Divisibilidad
+                        // Lógica de Divisibilidad (solo determina el contenido)
                         if ($j % $i == 0) {
                             $contenido = '*';
                         } else {
                             $contenido = '-';
                         }
-                        
-                        // LÓGICA DE SOMBREADO POR POSICIÓN: 
-                        // Aplicamos el sombreado claro si la suma de los índices es par (ej. 1+1=2, 2+2=4)
-                        $clase_posicion = (($i + $j_index) % 2 == 0) ? 'patron-claro' : '';
                     ?>
-                        
-                        <td class="<?php echo $clase_posicion; ?>">
+                        <td>
                             <?php echo $contenido; ?>
                         </td>
                         
